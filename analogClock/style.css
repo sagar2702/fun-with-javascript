@@ -1,0 +1,48 @@
+body{
+    margin:0;
+    padding: 0;
+}
+.clockbox{
+    background-color: khaki;
+    display: flex;
+    justify-content: center;
+}
+
+.circle{
+    fill:none;
+    stroke:#000000;
+    stroke-width: 9;
+}
+
+.hour-marks{
+   stroke: #000000;
+   stroke-width:9;
+   stroke-miterlimit: 10;
+   
+}
+
+.hour-hand{
+    fill: none;
+    stroke: #000000;
+    stroke-width: 17;
+    stroke-miterlimit: 10;
+}
+.minute-hand{
+    fill: none;
+    stroke: #000000;
+    stroke-width: 11;
+    stroke-miterlimit: 10;
+}
+
+.second-hand{
+    fill: none;
+    stroke: #000000;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+}
+
+/* Make all arms rotate around the same center point. */
+#hour,#min,#sec{
+    transform-origin: 300px 300px;
+    transition: transform .5s ease-in-out;
+}
