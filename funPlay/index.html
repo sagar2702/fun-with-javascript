@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>funPlay</title>
+    <link rel="stylesheet" href="css/mycss.css">
+    <script type="text/javascript" src="js/lib/paper.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.core.min.js"></script>
+    <script type="text/javascript" src="js/myScript.js"></script>
+    
+</head>
+<body>
+    <canvas id="myCanvas" resize></canvas>
+    <script type="text/paperscript"  canvas="myCanvas">
+        var shapes=[];
+        var data= {
+            a:{
+                sound: new Howl({
+                src: ['sounds/bubbles.mp3']
+                 }),
+                 color: "#ffff66"
+            },
+            b:{
+            sound: new Howl({
+            src: ['sounds/clay.mp3']
+             }),
+             color: "#99ff66"
+            },
+            c:{
+            sound: new Howl({
+            src: ['sounds/confetti.mp3']
+             }),
+             color: "#ff6699"
+            },
+             d:{
+                sound: new Howl({
+                src: ['sounds/corona.mp3']
+                 }),
+                 color: "#0099ff"
+             },
+            e:{
+                sound: new Howl({
+                src: ['sounds/dotted-spiral.mp3']
+                 }),
+                 color: "#9966ff"
+             },
+            f:{
+                sound: new Howl({
+                src: ['sounds/flash-1.mp3']
+                 }),
+                 color: "#9900ff"
+             },
+            g:{
+                sound: new Howl({
+                src: ['sounds/flash-2.mp3']
+                 }),
+                 color: "#ff0000"
+             },
+            h:{
+                sound: new Howl({
+                src: ['sounds/flash-3.mp3']
+                 }),
+                 color: "#009900"
+            },
+            i:{
+                sound: new Howl({
+                src: ['sounds/glimmer.mp3']
+                 }),
+                 color: "#006600"
+            },
+            j:{
+                sound: new Howl({
+                src: ['sounds/moon.mp3']
+                 }),
+                 color: "#0066cc"
+            }, 
+            k:{
+                sound: new Howl({
+                src: ['sounds/pinwheel.mp3']
+                 }),
+                color: "#9999ff"
+            },
+            l:{
+                sound: new Howl({
+                src: ['sounds/piston-1.mp3']
+                 }),
+                 color: "#6600cc"
+            },
+            m:{
+                sound: new Howl({
+                src: ['sounds/piston-2.mp3']
+                 }),
+                 color: "#b366ff"
+            },
+            n:{
+                sound: new Howl({
+                src: ['sounds/piston-3.mp3']
+                 }),
+                 color: "#ff3300"
+             },
+            o:{
+                sound: new Howl({
+                src: ['sounds/prism-1.mp3']
+                 }),
+                 color: "#6699ff"
+            },
+            p:{
+                sound: new Howl({
+                src: ['sounds/prism-2.mp3']
+                 }),
+                 color: "#d147a3"
+            },
+            q:{
+                sound: new Howl({
+                src: ['sounds/prism-3.mp3']
+                 }),
+                 color: "#33a6cc"
+            },
+            r:{
+                sound: new Howl({
+                src: ['sounds/splits.mp3']
+                 }),
+                 color: "#cccc33"
+            },
+            s:{
+                sound: new Howl({
+                src: ['sounds/squiggle.mp3']
+                 }),
+                 color: "#ffcc00"
+            },
+            t:{
+                sound: new Howl({
+                src: ['sounds/strike.mp3']
+                 }),
+                 color: "#339966"
+            },
+            u:{
+                sound: new Howl({
+                src: ['sounds/suspension.mp3']
+                 }),
+                 color: "#009933"
+            },
+            v:{
+                sound: new Howl({
+                src: ['sounds/timer.mp3']
+                }),
+                color: "#a31aff"
+            },
+            w:{
+                sound: new Howl({
+                src: ['sounds/ufo.mp3']
+                }),
+                color: "#0033cc"
+            },
+            x:{
+                sound: new Howl({
+                src: ['sounds/veil.mp3']
+                }),
+                color: "#339933"
+            },
+            y:{
+                sound: new Howl({
+                src: ['sounds/wipe.mp3']
+                }),
+                color: "#ff6600"
+            },
+            z:{
+                sound: new Howl({
+                src: ['sounds/zig-zag.mp3']
+                }),
+                color: "#33ccff"
+            }
+    
+        };
+        
+
+        function onKeyDown(event) {
+
+            var myPoint = new Point((view.size.width-100), (view.size.height-100));
+            
+            var point1 = myPoint * Point.random();
+            
+           
+             if(Math.random()*2 <=1)
+             {
+                
+                var shape= new Path.Rectangle(point1, 300);
+             }else
+             {
+                 var shape= new Path.Circle(point1, 500);
+             }
+           
+            data[event.key].sound.play();
+            shape.fillColor= data[event.key].color;
+            shapes.push(shape);
+        }
+       
+        
+        function onFrame(event) {
+            // Each frame, change the fill color of the path slightly by
+            // adding 1 to its hue:
+            //path.fillColor.hue += 1;
+            for(var i=0;i<shapes.length;i++)
+            {
+                shapes[i].fillColor.hue += 1;
+                shapes[i].rotate(10);
+                shapes[i].scale(0.92);
+                //removing shapes
+                if(shapes[i].area < 1)
+                {
+                    shapes[i].remove();
+                    shapes.splice(i, 1);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
